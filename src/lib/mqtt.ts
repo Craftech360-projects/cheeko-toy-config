@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 // MQTT Configuration
 const MQTT_BROKER = '167.71.237.218';
 const MQTT_PORT = 8083;
-const MQTT_PROTOCOL =  'wss' 
+const MQTT_PROTOCOL = window.location.protocol === 'https:' ? 'wss' : 'ws';
 const MQTT_PATH = '/mqtt'; // Explicitly define the path
 
 interface MqttMessage {
@@ -24,7 +24,7 @@ export const sendToyUpdate = async (serialNumber: string, roleType: string, lang
     username: 'admin', // Add default EMQX credentials if needed
     password: 'public',
     reconnectPeriod: 1000,
-    protocol: 'wss',
+    protocol: 'ws',
     path: MQTT_PATH,
     rejectUnauthorized: false
   });
